@@ -1,4 +1,3 @@
-import fetch from 'node-fetch';
 import safeRegex from 'safe-regex';
 
 export default async function handler(req, res) {
@@ -14,7 +13,6 @@ export default async function handler(req, res) {
       return;
     }
 
-    // Fetch image list
     const response = await fetch('https://raw.githubusercontent.com/Ebola16/random-pokemon-data/main/data/images.json');
     if (!response.ok) {
       res.status(500).send('Failed to load images.');
@@ -22,7 +20,6 @@ export default async function handler(req, res) {
     }
     const images = await response.json();
 
-    // Filter images by regex
     let regExp;
     try {
       regExp = new RegExp(regex);
@@ -30,6 +27,7 @@ export default async function handler(req, res) {
       res.status(400).send('Invalid regex pattern.');
       return;
     }
+
     const filtered = images.filter(img => regExp.test(img));
 
     if (filtered.length === 0) {
@@ -37,11 +35,9 @@ export default async function handler(req, res) {
       return;
     }
 
-    // Pick random image
     const randomImage = filtered[Math.floor(Math.random() * filtered.length)];
     const redirectUrl = `https://raw.githubusercontent.com/Ebola16/random-pokemon-data/main/images/${encodeURIComponent(randomImage)}`;
 
-    // 302 Redirect
     res.writeHead(302, { Location: redirectUrl });
     res.end();
 
