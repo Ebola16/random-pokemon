@@ -22,7 +22,7 @@ export default async function handler(req, res) {
 
     let regExp;
     try {
-      regExp = new RegExp(regex);
+      regExp = new RegExp(regex, 'i');
     } catch {
       res.status(400).send('Invalid regex pattern.');
       return;
