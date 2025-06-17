@@ -1,27 +1,5 @@
-import { Worker } from 'worker_threads';
-import path from 'path';
 import fetch from 'node-fetch';
 import safeRegex from 'safe-regex';
-
-function runWorker(workerData) {
-  return new Promise((resolve, reject) => {
-    const worker = new Worker(path.resolve('./worker.js'), { workerData });
-    const timeout = setTimeout(() => {
-      worker.terminate();
-      reject(new Error('Regex timeout'));
-    }, 100); // ms
-
-    worker.on('message', (result) => {
-      clearTimeout(timeout);
-      resolve(result);
-    });
-
-    worker.on('error', (err) => {
-      clearTimeout(timeout);
-      reject(err);
-    });
-  });
-}
 
 export default async function handler(req, res) {
   try {
@@ -31,12 +9,12 @@ export default async function handler(req, res) {
       res.status(400).send('256 character regex limit exceeded.');
       return;
     }
-
     if (!safeRegex(regex)) {
       res.status(400).send('Unsafe regex pattern.');
       return;
     }
 
+    // Fetch image list
     const response = await fetch('https://raw.githubusercontent.com/Ebola16/random-pokemon-data/main/data/images.json');
     if (!response.ok) {
       res.status(500).send('Failed to load images.');
@@ -44,21 +22,31 @@ export default async function handler(req, res) {
     }
     const images = await response.json();
 
-    const filtered = await runWorker({ images, regex });
+    // Filter images by regex
+    let regExp;
+    try {
+      regExp = new RegExp(regex);
+    } catch {
+      res.status(400).send('Invalid regex pattern.');
+      return;
+    }
+    const filtered = images.filter(img => regExp.test(img));
 
-    if (!Array.isArray(filtered) || filtered.length === 0) {
+    if (filtered.length === 0) {
       res.status(404).send('No matching images found.');
       return;
     }
 
+    // Pick random image
     const randomImage = filtered[Math.floor(Math.random() * filtered.length)];
     const redirectUrl = `https://raw.githubusercontent.com/Ebola16/random-pokemon-data/main/images/${encodeURIComponent(randomImage)}`;
 
+    // 302 Redirect
     res.writeHead(302, { Location: redirectUrl });
     res.end();
 
-  } catch (err) {
-    console.error(err);
-    res.status(500).send(err.message || 'Server error.');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server error.');
   }
 }
