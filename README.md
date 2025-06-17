@@ -28,7 +28,7 @@ Pokémon HOME images Gen I - IX provided by [@zim_](https://x.com/zim_)
 - **Get a random normal Gen 1 (0000 - 0151) Pokémon excluding alternative forms (file name contains parenthesis) and megas:**  
   [`https://random-pokemon.vercel.app/?regex=^(?!.*(\(|\)|Mega)).*normal/.*(000[0-9]|00[1-9][0-9]|01[0-4][0-9]|015[0-1])`](https://random-pokemon.vercel.app/?regex=%5E%28%3F%21.%2A%28%5C%28%7C%5C%29%7CMega%29%29.%2Anormal%2F.%2A%28000%5B0-9%5D%7C00%5B1-9%5D%5B0-9%5D%7C01%5B0-4%5D%5B0-9%5D%7C015%5B0-1%5D%29)
 
-- **Get a random normal Gen 1 (0000 - 0151) or Gen 3 (0252 - 0386) Pokémon:**  
+- **Get a random Gen 1 (0000 - 0151) or Gen 3 (0252 - 0386) Pokémon:**  
   [`https://random-pokemon.vercel.app/?regex=(000[0-9]|00[1-9][0-9]|01[0-4][0-9]|015[0-1]|025[2-9]|02[6-9][0-9]|03[0-7][0-9]|038[0-6])`](https://random-pokemon.vercel.app/?regex=(000[0-9]|00[1-9][0-9]|01[0-4][0-9]|015[0-1]|025[2-9]|02[6-9][0-9]|03[0-7][0-9]|038[0-6]))
 
 - **Get a random form of Unown**  
