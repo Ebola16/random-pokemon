@@ -34,5 +34,5 @@ Pokémon HOME images Gen I - IX provided by [@zim_](https://x.com/zim_)
 - **Get a random form of Unown**  
   [`https://random-pokemon.vercel.app/?=unown`](https://random-pokemon.vercel.app/?r=unown)
 
-- **Get a random Mega (use a space after mega so you don't accidently include Meganium)**  
+- **Get a random normal Mega (use a space after mega so you don't accidently include Meganium)**  
   [`https://random-pokemon.vercel.app/?r=normal/.*mega .*`](https://random-pokemon.vercel.app/?r=normal%2F.*mega%20.*%20)
