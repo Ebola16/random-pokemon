@@ -26,7 +26,7 @@ Pokémon HOME images Gen I - IX provided by [@zim_](https://x.com/zim_)
   [`https://random-pokemon.vercel.app/?r=normal/.*0(0[0-9][0-9]|1[0-4][0-9]|150|151)`](https://random-pokemon.vercel.app/?r=normal/.*0(0[0-9][0-9]|1[0-4][0-9]|150|151))
 
 - **Get a random normal Gen 1 (0000 - 0151) Pokémon excluding alternative forms (file name contains parenthesis) and megas:**  
-  [`https://random-pokemon.vercel.app/?e=(,),mega &r=normal/.*0(0[0-9][0-9]|1[0-4][0-9]|150|151)`](https://random-pokemon.vercel.app/?e=%28%2C%29%2Cmega%20&r=normal%2F.*0%280%5B0-9%5D%5B0-9%5D%7C1%5B0-4%5D%5B0-9%5D%7C150%7C151%29)
+  [`https://random-pokemon.vercel.app/?e=(,),mega &r=normal/.*0(0[0-9][0-9]|1[0-4][0-9]|150|151)`](https://random-pokemon.vercel.app/?e=(,),mega%20&r=normal/.*0(0[0-9][0-9]|1[0-4][0-9]|150|151))
 
 - **Get a random Gen 1 (0000 - 0151) or Gen 3 (0252 - 0386) Pokémon:**  
   [`https://random-pokemon.vercel.app/?r=(000[0-9]|00[1-9][0-9]|01[0-4][0-9]|015[0-1]|025[2-9]|02[6-9][0-9]|03[0-7][0-9]|038[0-6])`](https://random-pokemon.vercel.app/?r=(000[0-9]|00[1-9][0-9]|01[0-4][0-9]|015[0-1]|025[2-9]|02[6-9][0-9]|03[0-7][0-9]|038[0-6]))
@@ -35,4 +35,4 @@ Pokémon HOME images Gen I - IX provided by [@zim_](https://x.com/zim_)
   [`https://random-pokemon.vercel.app/?=unown`](https://random-pokemon.vercel.app/?r=unown)
 
 - **Get a random normal Mega (use a space after mega so you don't accidently include Meganium)**  
-  [`https://random-pokemon.vercel.app/?r=normal/.*mega .*`](https://random-pokemon.vercel.app/?r=normal%2F.*mega%20.*%20)
+  [`https://random-pokemon.vercel.app/?r=normal/.*mega .*`](https://random-pokemon.vercel.app/?r=normal/.*mega%20.*)
