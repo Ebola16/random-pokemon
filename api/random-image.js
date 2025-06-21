@@ -1,34 +1,56 @@
-import safeRegex from 'safe-regex';
+import RE2 from 're2';
+import fs from 'fs/promises';
+import path from 'path';
+
+function escapeRE2(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
 
 export default async function handler(req, res) {
   try {
-    const { regex = '.*' } = req.query;
+    const { e = '', r = '.*' } = req.query;
 
-    if (regex.length > 256) {
-      res.status(400).send('256 character regex limit exceeded.');
-      return;
-    }
-    if (!safeRegex(regex)) {
-      res.status(400).send('Unsafe regex pattern.');
+    if (Array.isArray(e)) {
+      res.status(400).send('Only one "e" query parameter is allowed.');
       return;
     }
 
-    const response = await fetch('https://raw.githubusercontent.com/Ebola16/random-pokemon-data/main/data/images.json');
-    if (!response.ok) {
-      res.status(500).send('Failed to load images.');
+    if (Array.isArray(r)) {
+      res.status(400).send('Only one "r" query parameter is allowed.');
       return;
     }
-    const images = await response.json();
+
+    if (r.length > 256) {
+      res.status(400).send('256 character "r" query parameter limit exceeded.');
+      return;
+    }
+
+    if (typeof e === 'string' && e.length > 256) {
+      res.status(400).send('256 character "e" query parameter limit exceeded.');
+      return;
+    }
 
     let regExp;
     try {
-      regExp = new RegExp(regex, 'i');
+      regExp = new RE2(r, 'i');
     } catch {
-      res.status(400).send('Invalid regex pattern.');
+      res.status(400).send('Invalid or unsafe RE2 regex pattern.');
       return;
     }
 
-    const filtered = images.filter(img => regExp.test(img));
+    const excludeTerms = e.split(',').map(term => term.trim()).filter(Boolean);
+    const excludeRegexes = excludeTerms.map(term => new RE2(escapeRE2(term), 'i'));
+    const filePath = path.join(process.cwd(), 'data', 'images.json');
+    const fileContents = await fs.readFile(filePath, 'utf-8');
+    const images = JSON.parse(fileContents);
+
+    const filtered = images.filter(img => {
+      if (!regExp.test(img)) return false;
+      for (const ex of excludeRegexes) {
+        if (ex.test(img)) return false;
+      }
+      return true;
+    });
 
     if (filtered.length === 0) {
       res.status(404).send('No matching images found.');

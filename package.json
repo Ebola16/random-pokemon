@@ -1,5 +1,5 @@
 {
   "dependencies": {
-    "safe-regex": "^2.1.1"
+    "re2": "^1.22.1"
   }
 }
