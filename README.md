@@ -1,6 +1,6 @@
 # Random Pokémon HOME Animated GIF
 
-Get a random Pokémon HOME animated gif from [random-pokemon-data](https://github.com/Ebola16/random-pokemon-data). A case-insensitive "r" ([RE2 regex](https://www.npmjs.com/package/re2)) query parameter is supported. A case-insensitive "e" query parameter (exclude) is also supported that excludes matches separated by commas. These filter the contents of `/data/images.json` and . Artificial intelligence tools are helpful for learning how to generate RE2 regex.
+Get a random Pokémon HOME animated gif from [random-pokemon-data](https://github.com/Ebola16/random-pokemon-data). A case-insensitive "r" query parameter ([RE2 regex](https://www.npmjs.com/package/re2), which is regex without backreferences and lookahead assertions) is supported. A case-insensitive "e" query parameter (exclude) is also supported that excludes matches separated by commas. These filter the contents of `/data/images.json`. Artificial intelligence tools are helpful for learning how to generate RE2 regex.
 
 Pokémon assets are ©2025 Nintendo, Creatures Inc., and GAME FREAK inc.
 All trademarks and copyrights are property of their respective owners.
