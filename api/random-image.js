@@ -58,7 +58,7 @@ export default async function handler(req, res) {
     }
 
     const randomImage = filtered[Math.floor(Math.random() * filtered.length)];
-    const redirectUrl = `https://raw.githubusercontent.com/Ebola16/random-pokemon-data/main/images/${encodeURIComponent(randomImage)}`;
+    const redirectUrl = `https://raw.githack.com/Ebola16/random-pokemon-data/main/images/${encodeURIComponent(randomImage)}`;
 
     res.writeHead(302, { Location: redirectUrl });
     res.end();
